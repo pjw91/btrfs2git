@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ### New
 
 ### Changes
+* Operate on index instead of worktree
+  * Speedup: 6x ~ 12x
 
 ### Fixes
 
