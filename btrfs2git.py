@@ -20,7 +20,7 @@ def write_object(b):
 
 
 def exclude(path):
-    if {'__pycache__', 'node_modules'}.intersection(path.split(os.sep)[1:]):
+    if {'__pycache__', 'node_modules'}.intersection(path.split(os.sep)):
         return True
     if os.path.splitext(path)[1] in {'.pyc', '.pyo'}:
         return True
@@ -29,8 +29,8 @@ def exclude(path):
 
 def handle_restore(proc, m):
     _p = re.escape(args.path)
-    REGULAR = re.compile(r'^Restoring (%s/.+)$' % _p)
-    SYMLINK = re.compile(r"^SYMLINK: '(%s/.+)' => '.*'$" % _p)
+    REGULAR = re.compile(r'^Restoring %s/(.+)$' % _p)
+    SYMLINK = re.compile(r"^SYMLINK: '%s/(.+)' => '.*'$" % _p)
     info, dirs = [], set()
     for ff in reversed(proc.stdout.decode().splitlines()):
         try:
@@ -43,7 +43,6 @@ def handle_restore(proc, m):
             path = F.match(ff).group(1)
             if exclude(path):
                 continue
-            path = path[len(args.path)+1:]
             dirs.add(os.path.dirname(path))
             if path not in dirs:
                 info.append(b'%s %s\t%s' % (b'100644', write_object(ff[0].encode('ascii')), path.encode()))
