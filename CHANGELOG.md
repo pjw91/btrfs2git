@@ -7,12 +7,18 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ---
 
 ### New
-* Initial version
 
 ### Changes
 
 ### Fixes
 
 ### Breaks
+
+
+## 0.1.0 - (2019-07-25)
+---
+
+### New
+* Initial version
 
 
